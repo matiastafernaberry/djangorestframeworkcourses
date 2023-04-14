@@ -1,5 +1,9 @@
 from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.decorators import api_view, renderer_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from django.core.paginator import Paginator, EmptyPage 
+from django.shortcuts import get_object_or_404
 from .models import Rating
 from .serializers import RatingSerializer
 from .models import MenuItem, Category
@@ -22,8 +26,14 @@ class RatingsView(generics.ListCreateAPIView):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
 
+
 def get_permissions(self):
     if(self.request.method=='GET'):
         return []
 
     return [IsAuthenticated()]
+
+@api_view()
+@permission_classes([IsAuthenticated])
+def secret(request):
+    return Response({"message":"some secret message"})

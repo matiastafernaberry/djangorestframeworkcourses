@@ -1,0 +1,1 @@
+# curl -X GET http://127.0.0.1:8000/api/secret/ -H 'Authorization: Token 7a4a189c971dfc149062afeb192b58923a1ecee3'
