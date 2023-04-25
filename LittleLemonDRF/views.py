@@ -14,13 +14,14 @@ class CategoriesView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+
 class MenuItemsView(generics.ListCreateAPIView):
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
     ordering_fields = ['price', 'inventory']
     filterset_fields = ['price', 'inventory']
     search_fields = ['title']
-
+    
 
 class RatingsView(generics.ListCreateAPIView):
     queryset = Rating.objects.all()
@@ -32,6 +33,7 @@ def get_permissions(self):
         return []
 
     return [IsAuthenticated()]
+
 
 @api_view()
 @permission_classes([IsAuthenticated])
