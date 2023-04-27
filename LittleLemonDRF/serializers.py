@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Rating, MenuItem, Category
+from .models import Rating, MenuItem, Category, Cart, Order, OrderItem
 from rest_framework.validators import UniqueTogetherValidator
 from django.contrib.auth.models import User
 
@@ -16,6 +16,22 @@ class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = MenuItem
         fields = ['id','title','price','inventory','category','category_id']
+        extra_kwargs = {
+            'price': {'min_value': 2},
+            'inventory':{'min_value':0}
+        }
+
+
+class CartSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = ['menuitem','quantity','unit_price','price']
+
+
+class OrderSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        #fields = ['menuitem','quantity','unit_price','price']
 
 
 class RatingSerializer (serializers.ModelSerializer):
