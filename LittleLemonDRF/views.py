@@ -39,12 +39,33 @@ class SingleMenuItemView(generics.RetrieveUpdateDestroyAPIView):
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
 
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
 
 
 class CartMenuItemsView(mixins.UpdateModelMixin,
                         generics.ListCreateAPIView):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+
+class OrdersView(mixins.UpdateModelMixin, 
+                generics.ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
@@ -56,14 +77,18 @@ class CartMenuItemsView(mixins.UpdateModelMixin,
         return self.destroy(request, *args, **kwargs)
 
 
-class OrdersView(generics.ListCreateAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
-
-
 class SingleOrdersView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
     
 
 class RatingsView(generics.ListCreateAPIView):
